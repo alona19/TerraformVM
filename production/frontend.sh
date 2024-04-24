@@ -34,7 +34,7 @@ chmod +x /tmp/frontend.sh
 EOF
 
 # Make the script executable
-chmod +x setup_frontend.sh
+chmod +x frontend.sh
 
 # Execute the script
-./setup_frontend.sh
+./frontend.sh
