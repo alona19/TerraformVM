@@ -40,7 +40,7 @@ resource "aws_subnet" "subnet_1b" {
 
 resource "aws_subnet" "subnet_1c" {
   vpc_id     = aws_vpc.myvpc.id
-  cidr_block = "10.0.1.0/24"
+  cidr_block = "10.0.3.0/24"
   availability_zone = "ap-south-1a"
 
 
@@ -152,7 +152,7 @@ resource "aws_instance" "web007" {
   ami           = "ami-007020fd9c84e18c7"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.subnet_1c.id
-  vpc_security_group_ids = [ aws_security_group.webservers.id ]
+  vpc_security_group_ids = [ aws_security_group.webserversPython.id ]
   key_name = "AlonaTest"
   tags = {
     Name = "Web007"
@@ -163,7 +163,7 @@ resource "aws_instance" "web008" {
   ami           = "ami-007020fd9c84e18c7"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.subnet_1c.id
-  vpc_security_group_ids = [ aws_security_group.webservers.id ]
+  vpc_security_group_ids = [ aws_security_group.webserversPython.id ]
   key_name = "AlonaTest"
   tags = {
     Name = "Web008"
@@ -174,7 +174,7 @@ resource "aws_instance" "web009" {
   ami           = "ami-007020fd9c84e18c7"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.subnet_1c.id
-  vpc_security_group_ids = [ aws_security_group.webservers.id ]
+  vpc_security_group_ids = [ aws_security_group.webserversPython.id ]
   key_name = "AlonaTest"
   tags = {
     Name = "Web009"
@@ -211,7 +211,27 @@ resource "aws_security_group" "webservers" {
     Name = "allow_tls"
   }
 }
+resource "aws_security_group" "webserversPython" {
+  name        = "webserversPython" 
+  
+  vpc_id      = aws_vpc.myvpc.id
 
+  // Allow all inbound traffic from within the VPC
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+
+  // Allow all outbound traffic within the VPC
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["10.0.0.0/16"]
+  }
+}
 resource "aws_security_group" "lb_webservers" {
   name        = "lb-webservers-80"
   description = "Allow HTTP inbound traffic"
@@ -314,7 +334,7 @@ resource "aws_lb" "lb-webservers" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb_webservers.id]
-  subnets            = [ aws_subnet.subnet_1a.id, aws_subnet.subnet_1b.id ]
+  subnets            = [ aws_subnet.subnet_1a.id, aws_subnet.subnet_1b.id, aws_subnet.subnet_1c.id ]
   tags = {
     Environment = "production"
   }
