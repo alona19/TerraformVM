@@ -91,6 +91,10 @@ resource "aws_instance" "web001" {
   tags = {
     Name = "Web001"
   }
+  user_data = <<-EOF
+  ${file("frontend.sh")}
+  EOF
+
 }
 
 resource "aws_instance" "web002" {
@@ -150,7 +154,7 @@ resource "aws_instance" "web006" {
 
 resource "aws_instance" "web007" {
   ami           = "ami-007020fd9c84e18c7"
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
   subnet_id = aws_subnet.subnet_1c.id
   vpc_security_group_ids = [ aws_security_group.webserversPython.id ]
   key_name = "AlonaTest"
@@ -161,7 +165,7 @@ resource "aws_instance" "web007" {
 
 resource "aws_instance" "web008" {
   ami           = "ami-007020fd9c84e18c7"
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
   subnet_id = aws_subnet.subnet_1c.id
   vpc_security_group_ids = [ aws_security_group.webserversPython.id ]
   key_name = "AlonaTest"
@@ -172,7 +176,7 @@ resource "aws_instance" "web008" {
 
 resource "aws_instance" "web009" {
   ami           = "ami-007020fd9c84e18c7"
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
   subnet_id = aws_subnet.subnet_1c.id
   vpc_security_group_ids = [ aws_security_group.webserversPython.id ]
   key_name = "AlonaTest"
@@ -351,9 +355,9 @@ resource "aws_lb_listener" "front_end_80" {
   }
 }
 
-resource "aws_lb_listener" "front_end_80_1" {
+resource "aws_lb_listener" "backend_1" {
   load_balancer_arn = aws_lb.lb-webservers.arn
-  port              = "80"
+  port              = "8080"
   protocol          = "HTTP"
 
   default_action {
@@ -361,9 +365,9 @@ resource "aws_lb_listener" "front_end_80_1" {
     target_group_arn = aws_lb_target_group.mywebservergroup2.arn
   }
 }
-resource "aws_lb_listener" "front_end_80_2" {
+resource "aws_lb_listener" "backend_2" {
   load_balancer_arn = aws_lb.lb-webservers.arn
-  port              = "80"
+  port              = "8081"
   protocol          = "HTTP"
 
   default_action {
