@@ -91,6 +91,17 @@ resource "aws_instance" "web001" {
   tags = {
     Name = "Web001"
   }
+  provisioner "file" {
+    source      = "script.sh"
+    destination = "/tmp/script.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "/tmp/script.sh"
+    ]
+  }
 }
 
 
