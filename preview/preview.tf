@@ -40,7 +40,7 @@ resource "aws_subnet" "subnet_1b" {
 
 resource "aws_subnet" "subnet_1c" {
   vpc_id     = aws_vpc.myvpc.id
-  cidr_block = "10.0.1.0/24"
+  cidr_block = "10.0.3.0/24"
   availability_zone = "ap-south-1a"
 
 
@@ -222,9 +222,9 @@ resource "aws_lb" "lb-webservers" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb_webservers.id]
-  subnets            = [ aws_subnet.subnet_1a.id, aws_subnet.subnet_1b.id ]
+  subnets            = [ aws_subnet.subnet_1a.id, aws_subnet.subnet_1b.id, aws_subnet.subnet_1c.id ]
   tags = {
-    Environment = "production"
+    Environment = "preview"
   }
 }
 
@@ -239,7 +239,7 @@ resource "aws_lb_listener" "front_end_80" {
   }
 }
 
-resource "aws_lb_listener" "front_end_80_1" {
+resource "aws_lb_listener" "backend1" {
   load_balancer_arn = aws_lb.lb-webservers.arn
   port              = "80"
   protocol          = "HTTP"
@@ -249,7 +249,7 @@ resource "aws_lb_listener" "front_end_80_1" {
     target_group_arn = aws_lb_target_group.mywebservergroup2.arn
   }
 }
-resource "aws_lb_listener" "front_end_80_2" {
+resource "aws_lb_listener" "backend2" {
   load_balancer_arn = aws_lb.lb-webservers.arn
   port              = "80"
   protocol          = "HTTP"
