@@ -92,7 +92,9 @@ resource "aws_instance" "web001" {
     Name = "Web001"
   }
   user_data = <<-EOF
-  ${file("frontend.sh")}
+    ${file("frontend.sh")}
+    chmod +x /tmp/frontend.sh
+    /tmp/frontend.sh
   EOF
 
 }
