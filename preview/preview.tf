@@ -20,7 +20,7 @@ resource "aws_vpc" "myvpc" {
 resource "aws_subnet" "subnet_1a" {
   vpc_id     = aws_vpc.myvpc.id
   cidr_block = "10.0.1.0/24"
-  availability_zone = "ap-south-1c"
+  availability_zone = "ap-south-1a"
   map_public_ip_on_launch = "true"
 
   tags = {
@@ -41,7 +41,7 @@ resource "aws_subnet" "subnet_1b" {
 resource "aws_subnet" "subnet_1c" {
   vpc_id     = aws_vpc.myvpc.id
   cidr_block = "10.0.3.0/24"
-  availability_zone = "ap-south-1a"
+  availability_zone = "ap-south-1c"
 
 
   tags = {
@@ -305,7 +305,7 @@ resource "aws_lb_listener" "front_end_80" {
 
 resource "aws_lb_listener" "backend1" {
   load_balancer_arn = aws_lb.lb-webservers.arn
-  port              = "80"
+  port              = "8080"
   protocol          = "HTTP"
 
   default_action {
@@ -315,7 +315,7 @@ resource "aws_lb_listener" "backend1" {
 }
 resource "aws_lb_listener" "backend2" {
   load_balancer_arn = aws_lb.lb-webservers.arn
-  port              = "80"
+  port              = "8081"
   protocol          = "HTTP"
 
   default_action {
