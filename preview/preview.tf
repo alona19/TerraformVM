@@ -174,7 +174,7 @@ resource "aws_instance" "web004" {
 
 resource "aws_instance" "web007" {
   ami           = "ami-007020fd9c84e18c7"
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
   subnet_id = aws_subnet.subnet_1c.id
   vpc_security_group_ids = [ aws_security_group.webservers.id ]
   key_name = "AlonaTest"
