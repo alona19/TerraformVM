@@ -19,5 +19,7 @@ sudo apt-get install -y docker-ce
 # Add the ubuntu user to the docker group
 sudo usermod -aG docker ubuntu
 
+#Docker login
+sudo docker login -u alonageorge25219 -p Jeal@1908
 # Run a Docker container
 sudo docker run -d --name my-container -p 80:80 nginx
