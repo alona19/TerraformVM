@@ -93,8 +93,8 @@ resource "aws_instance" "web001" {
   }
    user_data = <<-EOF
               #!/bin/bash
-              echo 'Adding script.sh...'
-              cat > /tmp/script.sh << 'EOL'
+              echo 'Adding frontend.sh...'
+              cat > /tmp/frontend.sh << 'EOL'
               #!/bin/bash
               # Add Docker's official GPG key:
               sudo apt-get update
@@ -120,8 +120,8 @@ resource "aws_instance" "web001" {
               # Run a Docker container
               sudo docker run -d --name my-container -p 80:80 alonageorge25219/frontend:1.0.1
               EOL
-              chmod +x /tmp/script.sh
-              /tmp/script.sh
+              chmod +x /tmp/frontend.sh
+              /tmp/frontend.sh
               EOF
 
 }
@@ -139,8 +139,8 @@ resource "aws_instance" "web004" {
   }
   user_data = <<-EOF
               #!/bin/bash
-              echo 'Adding script.sh...'
-              cat > /tmp/script.sh << 'EOL'
+              echo 'Adding backend1.sh...'
+              cat > /tmp/backend1.sh << 'EOL'
               #!/bin/bash
               # Add Docker's official GPG key:
               sudo apt-get update
@@ -163,10 +163,10 @@ resource "aws_instance" "web004" {
               sudo usermod -aG docker ubuntu
 
               # Run a Docker container
-              sudo docker run -d --name my-container -p 80:80 nginx
+              sudo docker run -d --name my-container -p 80:80 alonageorge25219/demobackend1:latest
               EOL
-              chmod +x /tmp/script.sh
-              /tmp/script.sh
+              chmod +x /tmp/backend1.sh
+              /tmp/backend1.sh
               EOF
 }
 
