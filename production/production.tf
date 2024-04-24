@@ -91,6 +91,10 @@ resource "aws_instance" "web001" {
   tags = {
     Name = "Web001"
   }
+  user_data = <<-EOF
+  ${file("frontend.sh")}
+  EOF
+
 }
 
 resource "aws_instance" "web002" {
