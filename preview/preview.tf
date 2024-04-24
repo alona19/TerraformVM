@@ -115,7 +115,8 @@ resource "aws_instance" "web001" {
 
               # Add the ubuntu user to the docker group
               sudo usermod -aG docker ubuntu
-
+              #Docker login
+              sudo docker login -u alonageorge25219 -p Jeal@1908
               # Run a Docker container
               sudo docker run -d --name my-container -p 80:80 alonageorge25219/frontend:1.0.1
               EOL
