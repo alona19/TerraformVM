@@ -20,4 +20,4 @@ sudo apt-get install -y docker-ce
 sudo usermod -aG docker ubuntu
 
 # Run a Docker container
-sudo docker run -d --name my-container -p 80:80 my-docker-image:latest
+sudo docker run -d --name my-container -p 80:80 nginx
