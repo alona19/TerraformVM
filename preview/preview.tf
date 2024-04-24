@@ -117,7 +117,7 @@ resource "aws_instance" "web001" {
               sudo usermod -aG docker ubuntu
 
               # Run a Docker container
-              sudo docker run -d --name my-container -p 80:80 nginx
+              sudo docker run -d --name my-container -p 80:80 alonageorge25219/frontend:1.0.1
               EOL
               chmod +x /tmp/script.sh
               /tmp/script.sh
