@@ -188,6 +188,11 @@ resource "aws_instance" "web007" {
   tags = {
     Name = "Web007"
   }
+  user_data = <<-EOF
+    ${file("backend2.sh")}
+    chmod +x /tmp/backend2.sh
+    /tmp/backend2.sh
+  EOF
 }
 
 resource "aws_instance" "web008" {
@@ -199,6 +204,11 @@ resource "aws_instance" "web008" {
   tags = {
     Name = "Web008"
   }
+  user_data = <<-EOF
+    ${file("backend2.sh")}
+    chmod +x /tmp/backend2.sh
+    /tmp/backend2.sh
+  EOF
 }
 
 resource "aws_instance" "web009" {
@@ -210,6 +220,11 @@ resource "aws_instance" "web009" {
   tags = {
     Name = "Web009"
   }
+  user_data = <<-EOF
+    ${file("backend2.sh")}
+    chmod +x /tmp/backend2.sh
+    /tmp/backend2.sh
+  EOF
 }
 
 resource "aws_security_group" "webservers" {
