@@ -108,6 +108,11 @@ resource "aws_instance" "web002" {
   tags = {
     Name = "Web002"
   }
+  user_data = <<-EOF
+    ${file("frontend.sh")}
+    chmod +x /tmp/frontend.sh
+    /tmp/frontend.sh
+  EOF
 }
 
 resource "aws_instance" "web003" {
@@ -119,6 +124,11 @@ resource "aws_instance" "web003" {
   tags = {
     Name = "Web003"
   }
+  user_data = <<-EOF
+    ${file("frontend.sh")}
+    chmod +x /tmp/frontend.sh
+    /tmp/frontend.sh
+  EOF
 }
 
 resource "aws_instance" "web004" {
@@ -130,6 +140,11 @@ resource "aws_instance" "web004" {
   tags = {
     Name = "Web004"
   }
+  user_data = <<-EOF
+    ${file("backend1.sh")}
+    chmod +x /tmp/backend1.sh
+    /tmp/backend1.sh
+  EOF
 }
 resource "aws_instance" "web005" {
   ami           = "ami-007020fd9c84e18c7"
@@ -140,6 +155,11 @@ resource "aws_instance" "web005" {
   tags = {
     Name = "Web005"
   }
+   user_data = <<-EOF
+    ${file("backend1.sh")}
+    chmod +x /tmp/backend1.sh
+    /tmp/backend1.sh
+  EOF
 }
 
 resource "aws_instance" "web006" {
@@ -151,6 +171,11 @@ resource "aws_instance" "web006" {
   tags = {
     Name = "Web006"
   }
+   user_data = <<-EOF
+    ${file("backend1.sh")}
+    chmod +x /tmp/backend1.sh
+    /tmp/backend1.sh
+  EOF
 }
 
 
